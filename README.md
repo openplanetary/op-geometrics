@@ -4,6 +4,7 @@
 
 The motivation behind  this repo is the following: 
 
+* Add geographic component / search based on planetary gazeteeer
 * measure openness of planetary data and create/evaluate metrics of data usage in scientific (and non-scientific) publications, with relevant alt-metrics for the largest possible amount of planetary missions/experiments
 * measure metrics/impact of planetary experiment data vs. public availability (e.g. a top-cited paper is using data that only a certain team has access to vs. data from certain teams/experiment are used by X and Y, with metrics)
 
