@@ -8,13 +8,9 @@ Python script to create a gazetteer (represented as a JSON file) of Mars feature
 Python3 version should be used. Jupyter notebook ipynb-file is also provided for convenience.
 
 ```shell 
-python database_mapping.py
+./run_script.sh [file_name.csv]
 ```
-or
-
-```shell 
-jupyter-notebook database_mapping.ipynb
-```
+The name of input csv file is optional, if not provided 'Mars_short.csv' is taken instead.
 
 ## Dependencies
 
