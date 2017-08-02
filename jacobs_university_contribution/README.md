@@ -21,7 +21,7 @@ bs4, requests, gdal, json and ADS
 ```
 For successful installation of ADS API Python package please follow the steps described in the website <http://ads.readthedocs.io/en/latest/#getting-started> .
 
-In case you are using jupyter-notebook it is easier to get all other packages with conda:
+In case you are using jupyter-notebook it is easier to get all other packages with conda, e.g.
 
 ```shell
 conda install gdal
