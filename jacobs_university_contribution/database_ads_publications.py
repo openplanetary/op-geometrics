@@ -57,11 +57,13 @@ with open(json_name) as fin:
 with io.open('features_short.json', 'w', encoding='utf-8') as fout:
     for feature in features:
         print(feature.name + " extended")
+        papers = []
+        
         try:
             papers = list(ads.SearchQuery(q=feature.name, sort="year", fl=['title', 'first_author', 'year', 'pub', 'bibcode']))
         except (ads.exceptions.APIResponseError, ads.exceptions.SolrResponseParseError) as e:
             "Error: {}".format(e)
-            pass
+            continue
         
         citation_str = []
         for paper in papers:
