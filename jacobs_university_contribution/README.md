@@ -14,9 +14,15 @@ The name of input csv file is optional, if not provided 'Mars_short.csv' is take
 
 ## Dependencies
 
-The following python modules should be pre-installed:
+The following additional modules should be pre-installed:
 
 ```
-bs4, requests, gdal and json
+bs4, requests, gdal, json and ADS
 ```
-In case you are using jupyter-notebook it is easier to get all packages with conda program.
+For successful installation of ADS API Python package please follow the steps described in the website <http://ads.readthedocs.io/en/latest/#getting-started> .
+
+In case you are using jupyter-notebook it is easier to get all other packages with conda:
+
+```shell
+conda install gdal
+```
