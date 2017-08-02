@@ -54,7 +54,7 @@ with open(json_name) as fin:
 # In[ ]:
 
 
-with io.open('features_short.json', 'w', encoding='utf-8') as fout:
+with io.open('features_extended.json', 'w', encoding='utf-8') as fout:
     for feature in features:
         print(feature.name + " extended")
         papers = []
