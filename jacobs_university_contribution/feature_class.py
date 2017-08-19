@@ -7,7 +7,7 @@
 from paper_class import Paper 
 
 
-# In[3]:
+# In[2]:
 
 
 # an encapsulation of data retrieved about a geographical feature
@@ -28,7 +28,7 @@ class Feature:
         return {'__type__': type(self).__name__, 'name': self.name,
                                'id': self.id,
                                'polygon_coordinates': self.pcoord,
-                               'publications': self.publ }
+                               'publications': [pub.toJSON() for pub in self.publ] }
     def to_dict(self):
         return {
             'name' : self.name,

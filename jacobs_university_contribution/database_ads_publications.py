@@ -78,22 +78,8 @@ with io.open('features_extended.json', 'w', encoding='utf-8') as fout:
         # extract several fields from each publication
         # whole list of fields can be found in https://github.com/adsabs/adsabs-dev-api/blob/master/search.md#fields
         for paper in papers:
-            #if (type(paper.title).__name__ == "NoneType"):
-            #    p_title = "Unknown"
-            #else:    
-            #    p_title = paper.title[0]
-                
-            #p_author = paper.first_author
-            #p_year = str(paper.year)
-            
-            #if (type(paper.pub).__name__ == "NoneType"):
-            #    p_pub = ", "
-            #else:
-            #    p_pub = " : " + paper.pub + ", "
-            # combine all fields in a comprehensible string
             p = Paper(paper.title[0], paper.author, paper.year, paper.pub, paper.bibcode)
             citation_str.append(p)
-            #citation_str.append(p_title + " by " + p_author + p_pub + p_year)
         # extend feature's list of publications 
         feature.addPublications(citation_str)
         #write extended feature info to a new json file

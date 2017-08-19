@@ -1,10 +1,10 @@
 
 # coding: utf-8
 
-# In[4]:
+# In[5]:
 
 
-from bs4 import BeautifulSoup
+from paper_class import Paper
 from feature_class import Feature
 import pandas as pd
 import requests
@@ -15,9 +15,10 @@ import csv
 import io
 import sys
 import ads
+from bs4 import BeautifulSoup
 
 
-# In[5]:
+# In[6]:
 
 
 # extracts the information about feature coordinates
@@ -40,7 +41,7 @@ def getFeatureGeomCoordinates(searchPattern, data):
     return geomStr
 
 
-# In[10]:
+# In[7]:
 
 
 #url path for retriving data for each feature
@@ -50,11 +51,8 @@ ogr.UseExceptions()  # Enable errors
 file_csv = 'Mars_short.csv'
 features = []
 
-if (len(sys.argv) > 1):
-	file_csv = sys.argv[1]
 
-
-# In[12]:
+# In[8]:
 
 
 # no headers should be present in a csv file
@@ -96,14 +94,14 @@ with open(file_csv, mode='r') as fin, io.open('features.json', 'w', encoding='ut
             
             #search for publications with html tree 
             #in the given html th tag contained td child td with publication name 
-            res = data.find("th", text="Reference").find_next_sibling("td").text
+            #res = data.find("th", text="Reference").find_next_sibling("td").text
             
-            feature = Feature(featName, featId, geomStr, res.strip())
+            feature = Feature(featName, featId, geomStr)
             # request ADS API for publications based on feature name
             # store objects of type Article
             papers = []
             try:
-                papers = list(ads.SearchQuery(q=feature.name, fl=['title', 'first_author', 'year', 'pub', 'bibcode']))
+                papers = list(ads.SearchQuery(q=feature.name, fl=['title', 'author', 'year', 'pub', 'bibcode']))
             except (ads.exceptions.APIResponseError, ads.exceptions.SolrResponseParseError) as e:
                 "Error: {}".format(e)
                 continue
@@ -112,20 +110,8 @@ with open(file_csv, mode='r') as fin, io.open('features.json', 'w', encoding='ut
             # extract several fields from each publication
             # whole list of fields can be found in https://github.com/adsabs/adsabs-dev-api/blob/master/search.md#fields
             for paper in papers:
-                if (type(paper.title).__name__ == "NoneType"):
-                    p_title = "Unknown"
-                else:    
-                    p_title = paper.title[0]
-
-                p_author = paper.first_author
-                p_year = str(paper.year)
-
-                if (type(paper.pub).__name__ == "NoneType"):
-                    p_pub = ", "
-                else:
-                    p_pub = " : " + paper.pub + ", "
-                # combine all fields in a comprehensible string
-                citation_str.append(p_title + " by " + p_author + p_pub + p_year)
+                p = Paper(paper.title[0], paper.author, paper.year, paper.pub, paper.bibcode)
+                citation_str.append(p)
             # extend feature's list of publications 
             feature.addPublications(citation_str)
             features.append(feature)
@@ -134,14 +120,14 @@ with open(file_csv, mode='r') as fin, io.open('features.json', 'w', encoding='ut
 fout.close()
 
 
-# In[13]:
+# In[ ]:
 
 
 pd.set_option('display.max_colwidth', -1)
 df = pd.DataFrame([feature.to_dict() for feature in features])
 
 
-# In[16]:
+# In[ ]:
 
 
 #print(df["publications"][0])
