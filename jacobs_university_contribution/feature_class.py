@@ -1,18 +1,23 @@
 
 # coding: utf-8
 
-# In[2]:
+# In[1]:
+
+
+from paper_class import Paper 
+
+
+# In[3]:
 
 
 # an encapsulation of data retrieved about a geographical feature
 # an element of a Gazetteer 
 class Feature:
-    def __init__(self, fname, fid, fcoord, fpubl):
+    def __init__(self, fname, fid, fcoord, fpubl = []):
         self.name = fname
         self.id = fid
         self.pcoord = fcoord
-        self.publ = []
-        self.publ.append(''.join(fpubl))
+        self.publ = fpubl
         
     # in case # publications for a feature > 1
     def addPublications(self, nEntry):

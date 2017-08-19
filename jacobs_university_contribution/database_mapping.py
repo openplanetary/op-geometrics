@@ -14,6 +14,7 @@ import csv
 import io
 import sys
 
+
 # In[ ]:
 
 
@@ -44,14 +45,11 @@ def getFeatureGeomCoordinates(searchPattern, data):
 #the name of the feature should be appended
 url = "https://planetarynames.wr.usgs.gov/Feature/"
 ogr.UseExceptions()  # Enable errors
+file_csv = 'Mars_short.csv'
 
 
 # In[ ]:
 
-if (len(sys.argv) > 1):
-	file_csv = sys.argv[1]
-else:
-	file_csv = "Mars_short.csv"
 
 # no headers should be present in a csv file
 # the first two values must be featureID and feature_name
@@ -92,10 +90,9 @@ with open(file_csv, mode='r') as fin, io.open('features.json', 'w', encoding='ut
             
             #search for publications with html tree 
             #in the given html th tag contained td child td with publication name 
-            res = data.find("th", text="Reference").find_next_sibling("td").text
-            #print(res.strip())
+            #res = data.find("th", text="Reference").find_next_sibling("td").text
             
-            nFeat = Feature(featName, featId, geomStr, res.strip())
+            nFeat = Feature(featName, featId, geomStr)
             # write feature to a gazetteer represented by a JSON file
             #json.dump(nFeat.dump(), fout, ensure_ascii=False, indent=4)
             fout.write(str(json.dumps(nFeat.dump(), ensure_ascii=False))+"\n")
@@ -103,5 +100,7 @@ fout.close()
 
 
 # In[ ]:
-	
+
+
+
 
