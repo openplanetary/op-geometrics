@@ -7,7 +7,7 @@
 import json
 
 
-# In[8]:
+# In[1]:
 
 
 # an encapsulation of Article class from ADS API
