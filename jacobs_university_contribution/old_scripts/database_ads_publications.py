@@ -10,6 +10,9 @@ import requests
 import re
 import io
 import pandas as pd
+import sys
+
+sys.path.insert(0, '../')
 from feature_class import Feature
 from paper_class import Paper
 

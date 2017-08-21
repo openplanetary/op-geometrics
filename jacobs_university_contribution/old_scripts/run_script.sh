@@ -8,7 +8,7 @@ else
 	file_csv="Mars_short.csv"
 fi
 
-python feature_class.py 2> feature_class.log
+python ../feature_class.py 2> feature_class.log
 if [ $? -ne 0 ] 
 then 
 	echo "****ERROR: feature_class.py failed***"

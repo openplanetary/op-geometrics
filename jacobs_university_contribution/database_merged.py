@@ -49,8 +49,12 @@ def getFeatureGeomCoordinates(searchPattern, data):
 url = "https://planetarynames.wr.usgs.gov/Feature/"
 ogr.UseExceptions()  # Enable errors
 file_csv = 'Mars_short.csv'
+output_file_name = 'features.json'
 features = []
 
+if (len(sys.argv) > 2):
+    file_csv = sys.argv[1]
+    output_file_name = sys.argv[2]
 
 # In[8]:
 
@@ -58,7 +62,7 @@ features = []
 # no headers should be present in a csv file
 # the first two values must be featureID and feature_name
 # JSON file is written with utf8 due to unicode standard of publications
-with open(file_csv, mode='r') as fin, io.open('features.json', 'w', encoding='utf-8') as fout:
+with open(file_csv, mode='r') as fin, io.open(output_file_name, 'w', encoding='utf-8') as fout:
     reader = csv.reader(fin, delimiter=',')
     for rows in reader:
         if (len(rows) > 1):
@@ -110,7 +114,16 @@ with open(file_csv, mode='r') as fin, io.open('features.json', 'w', encoding='ut
             # extract several fields from each publication
             # whole list of fields can be found in https://github.com/adsabs/adsabs-dev-api/blob/master/search.md#fields
             for paper in papers:
-                p = Paper(paper.title[0], paper.author, paper.year, paper.pub, paper.bibcode)
+                if (not paper.title):
+                    p_title = "Unknown title"
+                else:    
+                    p_title = paper.title[0]
+                
+                if (type(paper.pub).__name__ == "NoneType"):
+                    p_pub = "Unknown publication"
+                else:
+                    p_pub = paper.pub
+                p = Paper(p_title, paper.author, paper.year, p_pub, paper.bibcode)
                 citation_str.append(p)
             # extend feature's list of publications 
             feature.addPublications(citation_str)

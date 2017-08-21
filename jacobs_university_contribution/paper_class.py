@@ -45,6 +45,15 @@ class Paper :
                                'bibcode': self.bibcode }
     def toJSON(self):
         return json.dumps(self.dump(), ensure_ascii=False, indent=4)
+    
+    def to_dict(self):
+         return {
+            'title' : self.title,
+            'authors' : self.authors,
+            'year' : self.year,
+            'publication' : self.publ,
+            'bibcode' : self.bibcode
+        }
 
 
 # In[ ]:

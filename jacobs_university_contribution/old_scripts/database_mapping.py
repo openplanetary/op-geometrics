@@ -5,7 +5,6 @@
 
 
 from bs4 import BeautifulSoup
-from feature_class import Feature
 import requests
 import re
 import ogr
@@ -13,6 +12,9 @@ import json
 import csv
 import io
 import sys
+
+sys.path.insert(0, '../')
+from feature_class import Feature
 
 
 # In[ ]:
@@ -46,6 +48,9 @@ def getFeatureGeomCoordinates(searchPattern, data):
 url = "https://planetarynames.wr.usgs.gov/Feature/"
 ogr.UseExceptions()  # Enable errors
 file_csv = 'Mars_short.csv'
+
+if (len(sys.argv) > 1):
+    file_csv = sys.argv[1]
 
 
 # In[ ]:
