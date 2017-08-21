@@ -30,3 +30,8 @@ conda install gdal
 ## Example
 
 Example script 'database_ads_querying_ex' is provided as a jupyter-notebook and a python script. Script creates a database and makes queries to ADS API. By altering script variables it is possible to build new databases and create particular requests for publications related to a particular toponym. 
+
+```shell
+python database_ads_querying_ex.py
+```
+
