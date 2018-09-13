@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Moon</title>
+    <link rel="stylesheet" href="https://openlayers.org/en/v4.6.5/css/ol.css" type="text/css">
+    <!-- The line below is only needed for old environments like Internet Explorer and Android 4.x -->
+    <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL"></script>
+    <script src="https://openlayers.org/en/v4.6.5/build/ol.js"></script>
+  </head>
+  <body>
+    <div id="map" style = "width: 100%"></div>
+    <script>
+  var layers = [
+
+      new ol.layer.Tile({
+      source: new ol.source.WMTS({
+      url: "http://212.201.46.76:8080/geoserver/planet/wmts",
+      params: {'LAYERS': 'planet:venus_basemap', 'tiled': true},
+      serverType: 'geoserver'
+      })
+    })
+  ];
+
+
+
+var map = new ol.Map({
+  layers: layers,
+  target: 'map',
+  view: new ol.View({
+    center: [0, 0],
+    zoom: 2
+  })
+});
+
+
+    </script>
+  </body>
+</html>
